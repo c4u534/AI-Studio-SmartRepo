@@ -481,14 +481,20 @@ console.log("Execution output:", JSON.stringify(summary, null, 2));
     }
 
     const constructContent = assembledConstructCode || code;
+    const ext = assemblyTargetName.split('.').pop() || '';
     const newFile: IndexedFile = {
       id: `construct_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
       snapshotId: snapshot?.id || 'active',
+      userId: snapshot?.userId || 'local-user',
       path: assemblyTargetName.trim(),
       name: assemblyTargetName.split('/').pop() || 'Construct.ts',
       branch: assemblyBranch || snapshot?.defaultBranch || 'main',
-      category: assemblyCategory || 'Source Code',
+      category: (assemblyCategory as any) || 'Source Code',
       size: constructContent.length,
+      type: 'blob',
+      sha: `sha_${Math.random().toString(36).substring(2, 10)}`,
+      language: ext.toUpperCase() || 'TypeScript',
+      isReadme: false,
       url: `https://github.com/${snapshot?.fullName || 'custom'}/blob/${assemblyBranch}/${assemblyTargetName}`,
       rawUrl: `https://raw.githubusercontent.com/${snapshot?.fullName || 'custom'}/${assemblyBranch}/${assemblyTargetName}`,
       content: constructContent,

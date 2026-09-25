@@ -10,6 +10,7 @@ export type FileCategory =
 export interface IndexedFile {
   id: string;
   path: string;
+  name?: string;
   branch: string;
   size: number;
   type: 'blob' | 'tree' | 'file';
@@ -22,7 +23,10 @@ export interface IndexedFile {
   lineCount?: number;
   snapshotId: string;
   userId: string;
+  url?: string;
   rawUrl?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface BranchInfo {

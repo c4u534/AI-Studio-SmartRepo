@@ -71,7 +71,7 @@ export async function POST(req: NextRequest) {
 
     const ai = new GoogleGenAI({ apiKey });
 
-    let systemPrompt = `You are a Principal Security Engineer and Autonomous Agent Architect specializing in secure sandbox execution, bidirectional code anticipation, and deep repository research.`;
+    const systemPrompt = `You are a Principal Security Engineer and Autonomous Agent Architect specializing in secure sandbox execution, bidirectional code anticipation, and deep repository research.`;
     let userPrompt = '';
 
     if (mode === 'anticipate_vulnerabilities') {

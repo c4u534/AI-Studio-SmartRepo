@@ -147,10 +147,10 @@ export function BatchRenamerModal({
 
     // 2. Apply transformations
     const items = matchedFiles.map((f, index) => {
-      let fullPath = f.path;
+      const fullPath = f.path;
       const lastSlashIdx = fullPath.lastIndexOf('/');
       let dir = lastSlashIdx !== -1 ? fullPath.substring(0, lastSlashIdx) : '';
-      let filenameWithExt = lastSlashIdx !== -1 ? fullPath.substring(lastSlashIdx + 1) : fullPath;
+      const filenameWithExt = lastSlashIdx !== -1 ? fullPath.substring(lastSlashIdx + 1) : fullPath;
 
       // Extract name and extension
       const dotIdx = filenameWithExt.lastIndexOf('.');

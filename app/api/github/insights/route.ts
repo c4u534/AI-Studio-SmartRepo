@@ -118,7 +118,7 @@ async function fetchInsights(owner: string, repo: string, token: string) {
 
     // Process Pull Requests & PR Velocity
     let recentPRs: PullRequestMetric[] = [];
-    let mergeTimesHours: number[] = [];
+    const mergeTimesHours: number[] = [];
     let openCount = 0;
     let closedCount = 0;
     let mergedCount = 0;
