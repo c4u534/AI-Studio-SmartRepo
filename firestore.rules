@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    match /repo_snapshots/{snapshotId} {
+      allow get: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+      allow create: if isSignedIn() 
+        && isValidId(snapshotId)
+        && request.resource.data.userId == request.auth.uid;
+      allow update: if isSignedIn()
+        && isValidId(snapshotId)
+        && resource.data.userId == request.auth.uid
+        && request.resource.data.userId == request.auth.uid;
+      allow delete: if isSignedIn()
+        && isValidId(snapshotId)
+        && resource.data.userId == request.auth.uid;
+
+      match /files/{fileId} {
+        allow get: if isSignedIn() && resource.data.userId == request.auth.uid;
+        allow list: if isSignedIn() && resource.data.userId == request.auth.uid;
+        allow create: if isSignedIn()
+          && isValidId(fileId)
+          && request.resource.data.userId == request.auth.uid;
+        allow update: if isSignedIn()
+          && isValidId(fileId)
+          && resource.data.userId == request.auth.uid
+          && request.resource.data.userId == request.auth.uid;
+        allow delete: if isSignedIn()
+          && isValidId(fileId)
+          && resource.data.userId == request.auth.uid;
+      }
+    }
+  }
+}

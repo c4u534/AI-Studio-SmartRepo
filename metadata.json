@@ -1,0 +1,7 @@
+{
+  "name": "GitHub Smart Repository Multi-Indexer",
+  "description": "Deep GitHub repository indexer mapping all branches, folders, and files with README collation, Google Sheets matrix generation, Google Drive/Docs archival, and interactive visual tree mapping.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
